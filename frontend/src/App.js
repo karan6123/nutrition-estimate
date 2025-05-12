@@ -8,7 +8,8 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   // Backend base URL fallback (optional for dev)
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+  const API_BASE_URL ='https://nutrition-estimate-backend.onrender.com';
+;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
