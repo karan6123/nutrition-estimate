@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import NutritionOutput from './components/NutritionOutput';
@@ -6,15 +5,23 @@ import NutritionOutput from './components/NutritionOutput';
 function App() {
   const [dish, setDish] = useState('');
   const [nutrition, setNutrition] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Backend base URL fallback (optional for dev)
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!dish) return;
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/nutrition`, { dish });
+      setLoading(true);
+      const res = await axios.post(`${API_BASE_URL}/api/nutrition`, { dish });
       setNutrition(res.data.nutrition);
     } catch (err) {
-      alert('Failed to fetch nutrition info.');
+      console.error('API Error:', err);
+      alert('❌ Failed to fetch nutrition info. Please check the backend or try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -31,9 +38,10 @@ function App() {
         />
         <button
           type="submit"
-          className="w-full bg-green-500 text-white py-3 rounded hover:bg-green-600 transition"
+          disabled={loading}
+          className="w-full bg-green-500 text-white py-3 rounded hover:bg-green-600 transition disabled:bg-green-300"
         >
-          Estimate Nutrition
+          {loading ? 'Estimating...' : 'Estimate Nutrition'}
         </button>
       </form>
       {nutrition && <NutritionOutput nutrition={nutrition} />}
@@ -42,3 +50,4 @@ function App() {
 }
 
 export default App;
+
