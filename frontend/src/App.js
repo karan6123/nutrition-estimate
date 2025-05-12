@@ -11,7 +11,7 @@ function App() {
     e.preventDefault();
     if (!dish) return;
     try {
-      const res = await axios.post('https://nutrition-estimate-backend.onrender.com/api/nutrition', { dish });
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/nutrition`, { dish });
       setNutrition(res.data.nutrition);
     } catch (err) {
       alert('Failed to fetch nutrition info.');
