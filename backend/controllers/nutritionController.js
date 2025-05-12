@@ -33,4 +33,8 @@ exports.estimateNutrition = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error('Spoonacular API Error:', error.response?.data || err
+    console.error('Spoonacular API Error:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to fetch data from Spoonacular.' });
+  }
+};
+
