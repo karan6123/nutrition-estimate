@@ -7,16 +7,16 @@ function App() {
   const [nutrition, setNutrition] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Backend base URL fallback (optional for dev)
-  const API_BASE_URL ='https://nutrition-estimate-backend.onrender.com';
-;
+  // Backend URL
+  const API_BASE_URL = 'https://nutrition-estimate-backend.onrender.com';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!dish) return;
+
     try {
       setLoading(true);
-      const res = await axios.post('https://nutrition-estimate-backend.onrender.com/api/nutrition', { dish });
+      const res = await axios.post(`${API_BASE_URL}/api/nutrition`, { dish });
       setNutrition(res.data.nutrition);
     } catch (err) {
       console.error('API Error:', err);
