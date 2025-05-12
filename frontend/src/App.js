@@ -8,7 +8,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   // Backend base URL fallback (optional for dev)
-  const API_BASE_URL ='https://nutrition-estimate-backend.onrender.com/api/nutrition';
+  const API_BASE_URL ='https://nutrition-estimate-backend.onrender.com';
 ;
 
   const handleSubmit = async (e) => {
