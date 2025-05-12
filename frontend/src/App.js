@@ -16,7 +16,7 @@ function App() {
     if (!dish) return;
     try {
       setLoading(true);
-      const res = await axios.post(`${API_BASE_URL}/api/nutrition`, { dish });
+      const res = await axios.post('https://nutrition-estimate-backend.onrender.com/api/nutrition', { dish });
       setNutrition(res.data.nutrition);
     } catch (err) {
       console.error('API Error:', err);
